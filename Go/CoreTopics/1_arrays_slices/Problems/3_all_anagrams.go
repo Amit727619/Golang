@@ -12,21 +12,52 @@
 // The substring with starting index 0 is "cba," which is an anagram of "abc."
 // The substring with starting index 6 is "bac," which is an anagram of "abc
 
-
 package main
 
-import (
-	"fmt")
+import "fmt"
+
+
+func Anagrams(str, p string) bool {
+    if len(str) != len(p) {
+        return false
+    }
+
+    charCount := make(map[rune]int)
+
+   
+    for i := 0; i < len(str); i++ {
+		char := rune(str[i])
+		charCount[char]++
+	}
+
+    for i := 0; i < len(p); i++ {
+		char := rune(p[i])
+		charCount[char]--
+	}
+
+
+       
+    for i := 0; i < len(charCount); i++ {
+        if charCount[rune(i)] != 0 {
+        return false
+        }
+    }
+
+
+    return true
+}
+  
 
 func main() {
-   
+    str := "cbaebabacd"
+     p :="abc"
+
+    for i := 0; i < len(str)-2; i ++ {
+        str1 := str[i : i+3]
+        
+        fmt.Printf("%s ", str1)
+        result := Anagrams(str, p)
+        fmt.Println(result)
+    }
     
-	str := "cbae"  
-	
-
-	for i := 0 ; i < len(str) ; i++{
-         fmt.Println("print %c", str[i])
-	}
 }
-
-
